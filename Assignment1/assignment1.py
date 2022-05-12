@@ -57,3 +57,4 @@ if __name__ == "__main__":
     biodownloader = BioDownloader("m.professional188@gmail.com", '5fac5151cab100c58c572d349e388975b408')
     references = biodownloader.elinker(args.pubmed_id)[0:10]  # grabs 10 first references
     biodownloader.multi_predict(biodownloader.efetcher, references)
+    print('The requested files have been downloaded to "output"')
