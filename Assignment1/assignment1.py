@@ -1,7 +1,8 @@
-from unittest import result
+# from unittest import result
 from Bio import Entrez
 from multiprocessing.dummy import Pool
 from multiprocessing import cpu_count
+import time
 
 class BioDownloader:
     
@@ -14,9 +15,12 @@ class BioDownloader:
         return linked  # returns list with references
 
     def efetcher(id):
+        time.sleep(1)
+        print('sleeping...')
         Entrez.email = "m.professional188@gmail.com"
         handle = Entrez.efetch(db="pubmed", id=id, rettype="gb", retmode="xml", )
         record = Entrez.read(handle)
+        print('returning records...')
         return record
 
 
@@ -31,7 +35,7 @@ if __name__ == "__main__":
     biodownloader = BioDownloader
     references = biodownloader.elinker('30577416')[0:10]  # grabs 10 first references
     result = BioDownloader.multi_predict(biodownloader.efetcher, references)
-    
+    print(result)
     # print(biodownloader.efetcher(references))
     # cpus = mp.cpu_count()
     # with mp.Pool(cpus) as pool:
