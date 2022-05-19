@@ -81,7 +81,7 @@ def make_client_manager(ip, port, authkey):
 
 def capitalize(word):
     """Capitalizes the word you pass in and returns it"""
-    return word.upper()'
+    return word.upper()
 
 def runclient(num_processes):
     manager = make_client_manager(IP, PORTNUM, AUTHKEY)
