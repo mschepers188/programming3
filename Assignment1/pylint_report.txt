@@ -1,0 +1,23 @@
+ ************* Module assignment1
+ assignment1.py:48: convention (C0301, line-too-long, ) Line too long (114/100)
+ assignment1.py:57: convention (C0301, line-too-long, ) Line too long (104/100)
+ assignment1.py:60: convention (C0304, missing-final-newline, ) Final newline missing
+ assignment1.py:1: convention (C0114, missing-module-docstring, ) Missing module docstring
+ assignment1.py:9: convention (C0115, missing-class-docstring, BioDownloader) Missing class docstring
+ assignment1.py:19: convention (C0116, missing-function-docstring, BioDownloader.elinker) Missing function or method docstring
+ assignment1.py:19: warning (W0622, redefined-builtin, BioDownloader.elinker) Redefining built-in 'id'
+ assignment1.py:26: warning (W0621, redefined-outer-name, BioDownloader.elinker) Redefining name 'references' from outer scope (line 58)
+ assignment1.py:29: convention (C0116, missing-function-docstring, BioDownloader.efetcher) Missing function or method docstring
+ assignment1.py:29: warning (W0622, redefined-builtin, BioDownloader.efetcher) Redefining built-in 'id'
+ assignment1.py:40: convention (C0116, missing-function-docstring, BioDownloader.multi_predict) Missing function or method docstring
+ assignment1.py:40: refactor (R0201, no-self-use, BioDownloader.multi_predict) Method could be a function
+ assignment1.py:2: convention (C0411, wrong-import-order, ) standard import "from multiprocessing.dummy import Pool" should be placed before "from Bio import Entrez"
+ assignment1.py:3: convention (C0411, wrong-import-order, ) standard import "from multiprocessing import cpu_count" should be placed before "from Bio import Entrez"
+ assignment1.py:4: convention (C0411, wrong-import-order, ) standard import "import time" should be placed before "from Bio import Entrez"
+ assignment1.py:5: convention (C0411, wrong-import-order, ) standard import "import os" should be placed before "from Bio import Entrez"
+ assignment1.py:6: convention (C0411, wrong-import-order, ) standard import "import argparse as ap" should be placed before "from Bio import Entrez"
+ 
+ --------------------------------------------------------------------
+ Your code has been rated at 5.53/10 (previous run: -6.00/10, +11.53)
+ 
+ 
