@@ -45,6 +45,11 @@ class PMgetter:
             pickle.dump(authors, f)
             print(f"{pmid} authors pickled successfully.")
 
+        # Added for XML output
+        handle2 = Entrez.efetch(db="pubmed", id=pmid, rettype="XML", retmode="text", api_key=self.api_key)
+        with open(f'output/{pmid}.xml', 'wb') as file:
+            file.write(handle2.read())
+
 
 def make_server_manager(port, authkey, ip):
     """ Create a manager for the server, listening on the given port.
