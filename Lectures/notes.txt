@@ -1,0 +1,4 @@
+at 10:34, 31-05-2022
+Submitted batch job 120062
+to see jobs: sacct
+to cancel: scancel "jobID"
