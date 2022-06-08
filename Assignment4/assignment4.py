@@ -1,0 +1,1 @@
+# Check SeqIO for parsing .fa files and calculating the N50
