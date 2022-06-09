@@ -16,6 +16,6 @@ mkdir -p output
 
 
 # Run velveth and store output in student folder 
-seq 25 2 27 | parallel -j16 'velveth $OUTPUT/{} {} -longPaired -fastq $FILE1 $FILE2 && velvetg $OUTPUT/{} && cat $OUTPUT/{}/contigs.fa | (python3 assignment4.py && echo -e Kmer_size:{}; ) >> output/output.csv'
+seq 25 2 27 | parallel -j16 'velveth $OUTPUT/{} {} -longPaired -fastq $FILE1 $FILE2 && velvetg $OUTPUT/{} && cat $OUTPUT/{}/contigs.fa | (python3 assignment4.py && echo -e {}; ) >> output/output.csv'
 
 # Run python file and save output

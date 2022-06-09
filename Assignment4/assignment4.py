@@ -50,5 +50,6 @@ if __name__ == "__main__":
     # print(calculate_N50(contig_parser(input)))
     output = sys.stdout
     N50 = str(calculate_N50(contig_parser(input)))
-    output.write(f'N50:{N50}, \n')
+    # output.write(f'N50:{N50}, \n')
+    output.write(f'{N50}, ')
     # # print(calculate_N50(lenghts))
