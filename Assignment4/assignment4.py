@@ -1,18 +1,29 @@
 # Check SeqIO for parsing .fa files and calculating the N50
 
 from Bio import SeqIO
+import os
 import sys
 
-FileIn = '/homes/maschepers/Documents/GithubRepos/programming3/Assignment4/output/contigs.fa'
+from sqlalchemy import outparam
 
-def contig_parser(file):
-    handle = open(file, 'r')
-    SeqRecords = SeqIO.parse(handle, 'fasta')
-    len_list = []  # create list to store lengths
-    for record in SeqRecords:   # loop through each fasta entry
-        length = len(record.seq)    # get sequence length
-        # print(length)  # print("%s: %i bp" % (record.id, length))
-        len_list.append(length)
+# FileIn = '/homes/maschepers/Documents/GithubRepos/programming3/Assignment4/output/contigs.fa'
+
+def contig_parser(input_stdin):
+    # appends each line to a list
+    seq_list_raw = [str(line.strip()) for line in input_stdin]
+    seq_list_higher = []
+    seq_list_tmp = []
+
+    for n in range(len(seq_list_raw)):    
+        if not seq_list_raw[n].startswith('>'):
+            seq_list_tmp.append(seq_list_raw[n])
+        else:
+            seq_list_higher.append(seq_list_tmp)
+            seq_list_tmp = []
+    
+    seq_list_lengths = [len("".join(lst)) for lst in seq_list_higher]
+
+    return seq_list_lengths
 
 
 def calculate_N50(list_of_lengths):
@@ -34,5 +45,10 @@ def calculate_N50(list_of_lengths):
     return median
 
 
-lenghts = contig_parser(FileIn)
-print(calculate_N50(lenghts))
+if __name__ == "__main__":
+    input = sys.stdin
+    # print(calculate_N50(contig_parser(input)))
+    output = sys.stdout
+    N50 = str(calculate_N50(contig_parser(input)))
+    output.write(f'N50:{N50}, \n')
+    # # print(calculate_N50(lenghts))
