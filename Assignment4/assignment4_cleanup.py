@@ -13,15 +13,11 @@ def get_best_kmer(file):
 def copy_file(src, dst):
     shutil.copyfile(src, dst)
 
-
-def cleanup(keep_file, remove_path):
-    # go to keep and transfer to current output folder
-    # remove everything in the remove_path
-    pass
-
 if __name__ == "__main__":
+    print('Getting best K_mer from csv')
     print(get_best_kmer('output/output.csv'))
     best_k = get_best_kmer('output/output.csv')
     best_k_path = f'/students/2021-2022/master/Martin_DSLS/output/{best_k}/contigs.fa'
     output_path = 'output/contigs.fa'
+    print('Copying the file')
     copy_file(best_k_path, output_path)
