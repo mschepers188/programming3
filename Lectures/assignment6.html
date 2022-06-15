@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-06-13 ma 13:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Master DSLS / Programming 3 / Assignment 6 (Final Assignments)</title>
+<meta name="author" content="Martijn Herber" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Master DSLS / Programming 3 / Assignment 6 (Final Assignments)</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9a2dbcb">1. Introduction</a></li>
+<li><a href="#orgb2fc82c">2. Deliverables</a>
+<ul>
+<li><a href="#orgce4ec99">2.1. The Report</a></li>
+</ul>
+</li>
+<li><a href="#org93f2d2c">3. Deadline</a></li>
+<li><a href="#org99c0025">4. Project 1</a>
+<ul>
+<li><a href="#org2439d57">4.1. Introduction</a></li>
+</ul>
+</li>
+<li><a href="#org0e8c8de">5. Project 2</a>
+<ul>
+<li><a href="#org6b79a3c">5.1. Introduction</a></li>
+</ul>
+</li>
+<li><a href="#orgac13779">6. Project 3</a>
+<ul>
+<li><a href="#org9a8cd33">6.1. Introduction</a></li>
+<li><a href="#org1c40e2c">6.2. Extra information:</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9a2dbcb" class="outline-2">
+<h2 id="org9a2dbcb"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This final assignment of the course <a href="./prog3.html">Programming 3</a> is broader in scope and more open-ended than the other assignments of the course (1-5). Unlike the previous assignments it is not automatically graded by a script as pass/fail, and the technology you use for your solution is not predetermined like in the other assignments. This is an open-ended investigation of a big-data problem and you will need to hand in a report about your work. You can choose any of the technologies that were introduced in this course, or ones you already know, and mix them up if it helps you solve the problem in time.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb2fc82c" class="outline-2">
+<h2 id="orgb2fc82c"><span class="section-number-2">2.</span> Deliverables</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+You should make an "Assignment6" folder in your "programming3" GitHub repo. In it should be your programming code and one file "report.pdf" which is your report on this project (see below). There is no further structure imposed; you are free to structure your project in whichever way fits your goals best. You should aim to document your code in the Python-appropriate way (comments, docstrings), it should be object-oriented where that makes sense and it should definitely have a high (&gt;8) Pylint score but otherwise it is <b>your</b> code and you can write it the way you like.
+</p>
+</div>
+<div id="outline-container-orgce4ec99" class="outline-3">
+<h3 id="orgce4ec99"><span class="section-number-3">2.1.</span> The Report</h3>
+</div>
+</div>
+
+<div id="outline-container-org93f2d2c" class="outline-2">
+<h2 id="org93f2d2c"><span class="section-number-2">3.</span> Deadline</h2>
+</div>
+
+<div id="outline-container-org99c0025" class="outline-2">
+<h2 id="org99c0025"><span class="section-number-2">4.</span> Project 1</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org2439d57" class="outline-3">
+<h3 id="org2439d57"><span class="section-number-3">4.1.</span> Introduction</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+The first project you can choose is a continuation of the InterPROscan dataset you worked on for Assignment 5. You now know the structure and type of data that is involved. What I would ike you to do is to develop scikit-learn machine learning models to predict the function of the proteins in the dataset. I'm not going to mandate any particular model, but you should use your knowledge from DS3 to determine good candidate methods and try a couple, and report on yourGiven the size of the data, you should train your machine models in parallel! Dask is an obvious candidate for this, but you can also use any of the other frameworks we discussed in the course.
+</p>
+
+<p>
+The "function" of the protein which is the "class" your model should predict is defined as the InterPRO number which covers:
+</p>
+<ol class="org-ol">
+<li>&gt;90% of the protein's sequence</li>
+<li>Covers the largest length of the sequence</li>
+</ol>
+
+<p>
+The "features" that you use to predict that class are the <i>other</i>, smaller, InterPRO annotations. Take care to remove "noise" from the dataset, ie. lines from the TSV file which <i>don't</i> contain InterPRO numbers, proteins which <i>don't</i> have a large feature (according to the criteria above) etc. Be sure to note in your report how you processed the data and why you made the choices you did!
+</p>
+
+<p>
+Your script should, given one or more of these TSV files with InterPROscan annotations, produce models (Pickle them to save them!) which predict protein function, and a file of training-data on which you trained them.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0e8c8de" class="outline-2">
+<h2 id="org0e8c8de"><span class="section-number-2">5.</span> Project 2</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org6b79a3c" class="outline-3">
+<h3 id="org6b79a3c"><span class="section-number-3">5.1.</span> Introduction</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+The second project you can choose is an investigation of the scientific literature. In the <i>data/datasets/NCBI/Pubmed</i> directory on the assemblix computers, you can find a copy of the entire PubMed literature database in XML format. The project is to use your knowledge of graph theory and parallel processing to investigate the structure of publishing in the scientific world. Specifically, I would like to answer the following questions:
+</p>
+<ol class="org-ol">
+<li>How large a group of co-authors does the average publication have?</li>
+<li>Do authors mostly publish using always the same group of authors?</li>
+<li>Do authors mainly <i>reference</i> papers with other authors with whom they've co-authored papers (including themselves)?</li>
+<li>What is the distribution in time for citations of papers in general, and for papers with the highest number of citations? Do they differ?</li>
+<li>Is there a correlation between citations and the number of <i>keywords</i> that papers share? I.e. papers which share the same subject cite each other more often.</li>
+<li>For the most-cited papers (define your own cutoff), is the correlation in shared keywords between them and the papers that cite them different from (5) ?</li>
+</ol>
+
+<p>
+You should choose or define appropriate measures (statistical, graph theoretical) to answer these questions &#x2014; and motivate your answer in your report!
+</p>
+
+<p>
+Note that it probably helps to parse the actual NCBI XML data <span class="underline">only once</span> and then save it in another, smaller format suitable to answering the questions (e.g. a NetworkX datastructure).
+</p>
+
+<p>
+Your script should take as input the directory of PubMed abstracts in <i>data/datasets/NCBI/Pubmed</i> and produce nothing but a CSV with the questions asked above and the number that answers that question. Please note that the numbers will differ depending on what you choose to use as metrics, and there is no "right" answer! It's about how you motivate the answers that those numbers represent in your report, not the numbers themselves.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgac13779" class="outline-2">
+<h2 id="orgac13779"><span class="section-number-2">6.</span> Project 3</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org9a8cd33" class="outline-3">
+<h3 id="org9a8cd33"><span class="section-number-3">6.1.</span> Introduction</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+The KEGG pathway database contains information about which proteins are organised in pathways in different model organisms &#x2013; and eventually <span class="underline">all</span> organisms.
+</p>
+
+<p>
+For this project, I would like you to develop a parallel pipeline which maps a MinION metagenomics dataset onto KEGG pipeline data. This will involve two steps (at least):
+</p>
+<ol class="org-ol">
+<li>Mapping the data using the Minimap2 sequence mapper onto all known Bacteria</li>
+<li>Taking the best "hits" and using the KEGG API to find out which pathway they're in.</li>
+</ol>
+
+<p>
+Specifically, you will need to search through a number of parameters. There will be a number of settings of Minimap2 and choices what defines a best "hit" (often not the best as measured by alignment score but by being in a better-known model organism). Find out the best combination of these parameters, and motivate what led you to choose them in your report.
+</p>
+
+<p>
+The deliverable is a script which, given some new set of MinION sequencing results, maps the reads onto KEGG via the 2-step procedure above, and reports a table summarizing number of hits per KEGG pathway.
+</p>
+</div>
+</div>
+<div id="outline-container-org1c40e2c" class="outline-3">
+<h3 id="org1c40e2c"><span class="section-number-3">6.2.</span> Extra information:</h3>
+<div class="outline-text-3" id="text-6-2">
+<ul class="org-ul">
+<li>The <a href="https://www.genome.jp/kegg/">KEGG database</a> and <a href="https://www.kegg.jp/kegg/rest/">API</a></li>
+<li><a href="https://github.com/lh3/minimap2">The Minimap2 documentation</a> (minimap2 has been installed in the /commons/conda env)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Martijn Herber</p>
+<p class="date">Created: 2022-06-13 ma 13:35</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
