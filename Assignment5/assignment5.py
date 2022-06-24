@@ -115,11 +115,11 @@ if __name__ == "__main__":
     # Instanciate object
     pstool = PSTool()
     # start session
-    spk = pstool.pyspark_session('local')
+    spk = pstool.pyspark_session('local[16]')
     # load data
     path = '/data/dataprocessing/interproscan/all_bacilli.tsv'
     # path = 'all_bacilli_subset.tsv'
-    df=pstool.file_loader(path, '\t', spk)
+    df = pstool.file_loader(path, '\t', spk)
     pstool.get_questions(df)
     print('Closing spark session')
     spk.sparkContext.stop()
