@@ -125,10 +125,10 @@ class PSTool:
              Q10_answer])
         Explains = list([Q1_exp, Q2_exp, Q3_exp, Q4_exp, Q5_exp, Q6_exp, Q7_exp, Q8_exp, Q9_exp, Q10_exp])
         zipped = list(zip(Questnum, Answers, Explains))
-        data = pd.DataFrame(zipped, columns=[' Question number', 'Answers', 'Explains'])
-        # data = pd.DataFrame(zipped)
+        # data = pd.DataFrame(zipped, columns=[' Question number', 'Answers', 'Explains'])
+        data = pd.DataFrame(zipped)
         print('Writing to CSV')
-        data.to_csv("output/assignment5.csv", index=False)
+        data.to_csv("output/assignment5.csv", index=False, header=False)
         print('Done!')
 
 
