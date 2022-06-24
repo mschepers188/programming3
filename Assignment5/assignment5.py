@@ -4,8 +4,15 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import FloatType
 import pyspark.sql.functions as f
 import pandas as pd
+import os
 
 class PSTool:
+    def __init__(self):
+        if os.path.exists('output'):
+            pass
+        else:
+            os.makedirs('output')
+
     def pyspark_session(self, host_location):
         """
         Creates and returns spark session object
@@ -107,7 +114,7 @@ class PSTool:
         zipped = list(zip(Questnum, Answers, Explains))
         data = pd.DataFrame(zipped, columns=['Questnum', 'Answers', 'Explains'])
         print('Writing to CSV')
-        data.to_csv("assignment5.csv", index=False)
+        data.to_csv("output/assignment5.csv", index=False)
         print('Done!')
 
 
@@ -117,8 +124,8 @@ if __name__ == "__main__":
     # start session
     spk = pstool.pyspark_session('local[16]')
     # load data
-    path = '/data/dataprocessing/interproscan/all_bacilli.tsv'
-    # path = 'all_bacilli_subset.tsv'
+    # path = '/data/dataprocessing/interproscan/all_bacilli.tsv'
+    path = 'all_bacilli_subset.tsv'
     df = pstool.file_loader(path, '\t', spk)
     pstool.get_questions(df)
     print('Closing spark session')
