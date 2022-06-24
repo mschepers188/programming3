@@ -117,8 +117,8 @@ if __name__ == "__main__":
     # start session
     spk = pstool.pyspark_session('local')
     # load data
-    # path = '/data/dataprocessing/interproscan/all_bacilli.tsv'
-    path = 'all_bacilli_subset.tsv'
+    path = '/data/dataprocessing/interproscan/all_bacilli.tsv'
+    # path = 'all_bacilli_subset.tsv'
     df=pstool.file_loader(path, '\t', spk)
     pstool.get_questions(df)
     print('Closing spark session')
