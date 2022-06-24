@@ -1,4 +1,3 @@
-from pyspark import SparkContext
 from pyspark.sql.session import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import FloatType
@@ -8,6 +7,7 @@ import os
 
 class PSTool:
     def __init__(self):
+        print('Creating output folder')
         if os.path.exists('output'):
             pass
         else:
@@ -17,22 +17,27 @@ class PSTool:
         """
         Creates and returns spark session object
         """
+        print('Starting session')
         sc = SparkContext(host_location)  # Create spark context
         spark = SparkSession(sc)  # Create session
         return spark
 
     def file_loader(self, path, delim, spark_obj):
+        print('Loading in file')
         data = spark_obj.read.options(delimiter=delim).csv(path)  # load file
+        print('File loaded')
         return data
 
     def get_questions(self, df):
         # Q1
+        print('Working on Q1')
         Q1_exp = df.select("_c11").filter(df._c11 != '-').distinct()._jdf.queryExecution().simpleString()\
             .replace('\n', '')
         Q1_answer = df.select("_c11").filter(df._c11 != '-').distinct().count()
         Q1 = [1, Q1_answer, Q1_exp]
 
         # Q2
+        print('Working on Q2')
         Q2_exp = df.select("_c11").filter(df._c11 != '-').distinct()._jdf.queryExecution().simpleString().\
             replace('\n', '')
         Q2_answer = df.select("_c11").filter(df._c11 != '-').count() / df.select("_c11").filter(
@@ -40,6 +45,7 @@ class PSTool:
         Q2 = [2, Q2_answer, Q2_exp]
 
         # Q3
+        print('Working on Q3')
         Q3_exp = df.withColumn("_c13", explode(split(col("_c13"), '\\|'))).select("_c13").filter(df._c13 != '-').agg(
             {'_c13': 'max'})._jdf.queryExecution().simpleString().replace('\n', '')
         Q3_answer = df.withColumn("_c13", explode(split(col("_c13"), '\\|'))).select("_c13").filter(df._c13 != '-').agg(
@@ -47,12 +53,14 @@ class PSTool:
         Q3 = [3, Q3_answer, Q3_exp]
 
         # Q4
+        print('Working on Q4')
         Q4_exp = df.select(abs(df._c7 - df._c8)).agg(
             {'abs((_c7 - _c8))': 'mean'})._jdf.queryExecution().simpleString().replace('\n', '')
         Q4_answer = df.select(abs(df._c7 - df._c8)).agg({'abs((_c7 - _c8))': 'mean'}).collect()[0][0]
         Q4 = [4, Q4_answer, Q4_exp]
 
         # Q5
+        print('Working on Q5')
         Q5_exp = df.filter(df._c11 != '-').groupBy('_c11').count()._jdf.queryExecution().simpleString().\
             replace('\n', '')
         df_g = df.filter(df._c11 != '-').groupBy('_c11').count()
@@ -61,6 +69,7 @@ class PSTool:
         Q5 = [5, Q5_answer, Q5_exp]
 
         # Q6
+        print('Working on Q6')
         Q6_exp = df.withColumn('perc', (df._c7 - df._c8) / df._c2).sort(
             'perc')._jdf.queryExecution().simpleString().replace('\n', '')
         df_2 = df.withColumn('perc', (df._c7 - df._c8) / df._c2).sort('perc')
@@ -70,6 +79,7 @@ class PSTool:
         Q6 = [6, Q6_answer, Q6_exp]
 
         # Q7
+        print('Working on Q7')
         Q7_exp = df.filter(df._c12 != '-').select('_c12').withColumn("_c12", explode(split(col("_c12"), ' '))).groupBy(
             '_c12').count().sort('count', ascending=False)._jdf.queryExecution().simpleString().replace('\n', '')
         Q7_answer = df.filter(df._c12 != '-').select('_c12').withColumn("_c12",
@@ -79,6 +89,7 @@ class PSTool:
         Q7 = [7, Q7_answer, Q7_exp]
 
         # Q8
+        print('Working on Q8')
         Q8_exp = df.filter(df._c12 != '-').select('_c12').withColumn("_c12", explode(split(col("_c12"), ' '))).groupBy(
             '_c12').count().sort('count', ascending=True)._jdf.queryExecution().simpleString().replace('\n', '')
         Q8_answer = df.filter(df._c12 != '-').select('_c12').withColumn("_c12",
@@ -88,6 +99,7 @@ class PSTool:
         Q8 = [8, Q8_answer, Q8_exp]
 
         # Q9
+        print('Working on Q9')
         Q9_exp = df.where(f.col('_c11').isin(Q6_answer)).filter(df._c12 != '-').select('_c12').\
             withColumn("_c12",explode(split(col("_c12"),' '))).groupBy(
             '_c12').count().sort('count', ascending=False)._jdf.queryExecution().simpleString().replace('\n', '')
@@ -97,6 +109,7 @@ class PSTool:
         Q9 = [9, Q9_answer, Q9_exp]
 
         # Q10
+        print('Working on Q10')
         Q10_exp = df.select(df._c0, df._c11, df._c2).filter(df._c11 != "-").groupby(df._c0,"_c2")\
             .count()._jdf.queryExecution().simpleString().replace('\n', '')
         Q10 = df.select(df._c0, df._c11, df._c2).filter(df._c11 != "-").groupby(df._c0, "_c2").count()
@@ -112,7 +125,8 @@ class PSTool:
              Q10_answer])
         Explains = list([Q1_exp, Q2_exp, Q3_exp, Q4_exp, Q5_exp, Q6_exp, Q7_exp, Q8_exp, Q9_exp, Q10_exp])
         zipped = list(zip(Questnum, Answers, Explains))
-        data = pd.DataFrame(zipped, columns=['Questnum', 'Answers', 'Explains'])
+        # data = pd.DataFrame(zipped, columns=['Questnum', 'Answers', 'Explains'])
+        data = pd.DataFrame(zipped)
         print('Writing to CSV')
         data.to_csv("output/assignment5.csv", index=False)
         print('Done!')
