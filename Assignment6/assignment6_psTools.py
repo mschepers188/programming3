@@ -91,6 +91,8 @@ if __name__ == "__main__":
 
     df = pstool.file_loader(file_path, '\t', spk, schema)
     df_munged = pstool.data_munger(df, maxsize=0.9)
+    labels = pstool.get_array_from_df(df_munged, 'InterPro_annotations_accession')
+    print(labels)
     numeric_cols = pstool.get_array_from_df(df_munged, num_cols)
 
     sign_desc_array = pstool.words_to_array(df_munged, 'Signature_description')
@@ -99,5 +101,6 @@ if __name__ == "__main__":
     print(IP_annot_desc_array)
     final_array = np.concatenate([numeric_cols, sign_desc_array, IP_annot_desc_array], axis=1)
     print(final_array)
+    print(final_array.shape)
     print('Closing spark session')
     spk.sparkContext.stop()
